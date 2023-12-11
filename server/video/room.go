@@ -59,3 +59,16 @@ func (r *RoomMap) DeleteRoom(roomID string) {
 	defer r.Mutex.Unlock()
 	delete(r.Map, roomID)
 }
+
+func (r *RoomMap) GetAvailableRoom(maxParticipants int) string {
+	r.Mutex.RLock()
+	defer r.Mutex.RUnlock()
+
+	for roomID, participants := range r.Map {
+		if len(participants) < maxParticipants {
+			return roomID
+		}
+	}
+
+	return ""
+}

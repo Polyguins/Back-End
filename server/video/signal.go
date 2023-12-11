@@ -12,12 +12,23 @@ var AllRooms RoomMap
 
 func CreateRoomRequestHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	roomID := AllRooms.CreateRoom()
+
+	var roomID string
+	availableRoom := AllRooms.GetAvailableRoom(2)
+	if availableRoom != "" {
+		roomID = availableRoom
+	} else {
+		roomID = AllRooms.CreateRoom()
+	}
+
 	type resp struct {
 		RoomID string `json:"room_id"`
 	}
-	log.Println(AllRooms.Map)
-	json.NewEncoder(w).Encode(resp{RoomID: roomID})
+
+	err := json.NewEncoder(w).Encode(resp{RoomID: roomID})
+	if err != nil {
+		return
+	}
 }
 
 var upgrader = websocket.Upgrader{
