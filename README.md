@@ -7,4 +7,4 @@ type the following commands into the root of the repo
 `pip install django` <br>
 `python3 manage.py runserver` <br>
 
-once you type these commands, go to http://127.0.0.1:8000/
+once you run these commands, go to http://127.0.0.1:8000/
