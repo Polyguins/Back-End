@@ -1,5 +1,6 @@
 <h1>Getting Started</h1>
 
+once you clone the repo,
 type the following commands into the root of the repo
 
 `python3 -m venv .venv`<br>
